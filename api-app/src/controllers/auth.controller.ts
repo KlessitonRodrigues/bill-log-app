@@ -1,23 +1,65 @@
-import { Body, Controller, Get, Param, Post } from "@nestjs/common";
+import {
+  Body,
+  Controller,
+  Headers,
+  HttpStatus,
+  Post,
+  Res,
+} from "@nestjs/common";
+import { Response } from "express";
+import { AuthService } from "src/services/auth.service";
 import { UserService } from "src/services/user.service";
+import { hoursToMs } from "src/utils/time";
 
 @Controller("/auth")
 export class AuthController {
-  constructor(private userService: UserService) {}
+  constructor(
+    private authService: AuthService,
+    private userService: UserService
+  ) {}
 
-  @Get()
-  async getUsers(@Body() body) {
-    return this.userService.findAll();
+  @Post("/sign-in")
+  async signIn(@Body() body, @Res() res: Response) {
+    try {
+      console.log(body);
+      const { email, password, rememberMe } = body;
+      const expireIn = rememberMe ? hoursToMs(48) : hoursToMs(1);
+      const token = await this.authService.signIn(email, password, expireIn);
+      return res.status(HttpStatus.OK).json({ token });
+    } catch (err: any) {
+      res.status(HttpStatus.BAD_REQUEST).json({ error: err.message });
+      return;
+    }
   }
 
-  @Get(":id")
-  async getUserById(@Param() params) {
-    const { id } = params;
-    return this.userService.findOne(id);
+  @Post("/sign-up")
+  async signUp(@Body() body, @Res() res: Response) {
+    try {
+      const user = await this.authService.signUp(body);
+      return res.status(HttpStatus.CREATED).json(user);
+    } catch (err: any) {
+      res.status(HttpStatus.BAD_REQUEST).json({ error: err.message });
+      return;
+    }
   }
 
-  @Post()
-  async createUser(@Body() body) {
-    return this.userService.create(body);
+  @Post("/refresh-token")
+  async refreshToken(@Headers() headers, @Res() res: Response) {
+    try {
+      const token = headers["Authorization"];
+      if (!token) throw new Error("missing token");
+
+      const newToken = await this.authService.refreshToken(token);
+      const user = await this.userService.getUser(newToken.userId);
+      const userData = {
+        user,
+        token: newToken.token,
+      };
+
+      return res.json(userData);
+    } catch (err: any) {
+      res.status(HttpStatus.BAD_REQUEST).json({ error: err.message });
+      return;
+    }
   }
 }

@@ -1,40 +1,17 @@
 import { Injectable } from "@nestjs/common";
 import { InjectModel } from "@nestjs/sequelize";
-import { UserSchema } from "src/schemas/user.schema";
+import UserModel from "src/model/user.model";
 
 @Injectable()
 export class UserService {
   constructor(
-    @InjectModel(UserSchema)
-    private userModel: typeof UserSchema
+    @InjectModel(UserModel)
+    private UserTable: typeof UserModel
   ) {}
 
-  async findOne(id: string): Promise<any> {
-    this.userModel.findOne({ where: { id } });
-    return { test: "USER 1" };
-  }
-
-  async findAll(): Promise<any> {
-    const users = await this.userModel.findAll();
-    return users;
-  }
-
-  async create(user: any): Promise<any> {
-    const newUser = await this.userModel.create(user);
-    return newUser;
-  }
-
-  async update(id: string, user: any): Promise<any> {
-    const updatedUser = await this.userModel.update(user, {
-      where: { id },
-    });
-    return updatedUser;
-  }
-
-  async delete(id: string): Promise<any> {
-    const deletedUser = await this.userModel.destroy({
-      where: { id },
-    });
-    return deletedUser;
+  async getUser(userId: string) {
+    const user = await this.UserTable.findOne({ where: { id: userId } });
+    if (!user) throw new Error("user not found");
+    return user;
   }
 }
