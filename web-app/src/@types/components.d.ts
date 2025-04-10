@@ -62,6 +62,15 @@ declare namespace Props {
     input?: any;
   };
 
+  type SelectionField = {
+    name?: string;
+    label?: string;
+    placeholder?: string;
+    error?: string;
+    input?: any;
+    options?: { value: string; label: string }[];
+  };
+
   type Icons = {
     size?: number;
     onPress?: () => void;

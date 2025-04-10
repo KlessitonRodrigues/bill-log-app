@@ -3,6 +3,7 @@ import styled, { css } from "styled-components";
 
 export const Card = styled.div<Props.CardField>(
   ({ theme, w, h, p, m, noRounded }) => css`
+    width: 100%;
     display: flex;
     flex-direction: column;
     gap: ${cssSize(4)};

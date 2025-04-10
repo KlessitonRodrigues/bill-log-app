@@ -3,7 +3,7 @@ import { CgSpinner } from "react-icons/cg";
 import { Column } from "src/lib/base/styled/Flex";
 import { getText } from "src/utils/i18n";
 
-import If from "../Conditional/If";
+import If from "../If";
 import { Container, FullScreen, LoadLine, Spinner, Title } from "./styled";
 
 const Loading = (props: Props.Loading) => {

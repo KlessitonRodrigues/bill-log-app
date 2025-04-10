@@ -4,6 +4,8 @@ import { cssSize } from "src/styles/utils";
 
 export const Button = styled.button(
   ({ theme }) => css`
+    max-width: fit-content;
+    min-width: fit-content;
     font-family: "Roboto", sans-serif;
     min-width: fit-content;
     font-size: ${theme.fontSize.md};

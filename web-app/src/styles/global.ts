@@ -124,6 +124,16 @@ export default createGlobalStyle(
       text-align: center;
     }
 
+    .react-selector {
+      width: 100%;
+    }
+
+    .react-selector__control {
+      border-radius: ${theme.radius.sm} !important;
+      border: ${theme.border.sm} !important;
+      overflow: hidden;
+    }
+
     @media (max-width: ${screenSize.tablet}px) {
       html {
         font-size: 15px;

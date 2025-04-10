@@ -57,7 +57,7 @@ export const LoadLine = styled.div(
       height: ${cssSize(2)};
       width: 0%;
       border-radius: ${cssSize(1)};
-      background-image: ${gradients.blueAndGreen};
+      background-image: ${gradients.darkPurple};
       animation: ${animations.progress} 5s linear forwards;
     }
   `

@@ -1,8 +1,9 @@
 import { useState } from "react";
 import BillChartAnimation from "src/lib/base/animations/BillChart";
 import If from "src/lib/base/common/If";
-import { CardMain, CardWhite } from "src/lib/base/styled/Card";
-import { Row, Box } from "src/lib/base/styled/Flex";
+import Text from "src/lib/base/common/Text";
+import { CardWhite } from "src/lib/base/styled/Card";
+import { Row, Box, Column } from "src/lib/base/styled/Flex";
 import SignInForm from "src/lib/forms/login/SignIn";
 import SignUpForm from "src/lib/forms/login/SignUp";
 
@@ -11,25 +12,24 @@ const LoginPage = () => {
   const onChangeForm = () => setNewAccount(!newAccount);
 
   return (
-    <Row h="100vh" responsive p={4} gap={4}>
-      <Box maxw={200}>
+    <Row h="100vh" responsive p={6} gap={12}>
+      <Box h="100%">
+        <CardWhite h="100%">
+          <Column center h="100%">
+            <Text tag="h1" size={30}>
+              Bill Logs
+            </Text>
+            <BillChartAnimation />
+          </Column>
+        </CardWhite>
+      </Box>
+      <Box maxw={180}>
         <If check={newAccount}>
-          <CardWhite p={12}>
-            <SignInForm goAccountForm={onChangeForm} />
-          </CardWhite>
+          <SignInForm goAccountForm={onChangeForm} />
         </If>
         <If check={!newAccount}>
-          <CardWhite p={12}>
-            <SignUpForm goLoginForm={onChangeForm} />
-          </CardWhite>
+          <SignUpForm goLoginForm={onChangeForm} />
         </If>
-      </Box>
-      <Box h="100%">
-        <CardMain h="100%">
-          <Row center h="100%">
-            <BillChartAnimation />
-          </Row>
-        </CardMain>
       </Box>
     </Row>
   );

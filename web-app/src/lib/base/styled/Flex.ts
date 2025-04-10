@@ -39,7 +39,7 @@ export const Row = styled(Box)(
 );
 
 export const Column = styled(Box)(
-  ({ gap, left, right, top, bottom }) => css`
+  ({ gap, left, right, top, bottom, center }) => css`
     width: 100%;
     display: flex;
     align-items: center;
@@ -47,6 +47,7 @@ export const Column = styled(Box)(
     gap: ${cssSize(gap ?? 2)};
     ${top && "justify-content: flex-start;"}
     ${bottom && "justify-content: flex-end;"}
+    ${center && "justify-content: center;"}
     ${left && "align-items: flex-start;"}
     ${right && "align-items: flex-end;"}
   `

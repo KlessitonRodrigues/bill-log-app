@@ -1,13 +1,13 @@
 import { ErrorLabel, Input, Label } from "../../styled/Inputs";
 
-const TextInput = (props: Props.InputField) => {
+const DateInput = (props: Props.InputField) => {
   const { name, label, placeholder, error, input } = props;
 
   return (
     <Label>
       {label}
       <Input
-        type="text"
+        type="date"
         id={name}
         name={name}
         placeholder={placeholder}
@@ -20,4 +20,4 @@ const TextInput = (props: Props.InputField) => {
   );
 };
 
-export default TextInput;
+export default DateInput;
