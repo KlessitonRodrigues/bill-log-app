@@ -1,6 +1,6 @@
 import { CgSpinner } from "react-icons/cg";
 
-import { Column } from "src/lib/base/StyledComponents/Flex";
+import { Column } from "src/lib/base/styled/Flex";
 import { getText } from "src/utils/i18n";
 
 import If from "../Conditional/If";

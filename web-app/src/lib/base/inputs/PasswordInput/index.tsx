@@ -1,11 +1,6 @@
 import { PiEyeBold, PiEyeClosedBold } from "react-icons/pi";
-import {
-  ErrorLabel,
-  Input,
-  InputIconRight,
-  Label,
-} from "../../StyledComponents/Inputs";
-import { Row } from "../../StyledComponents/Flex";
+import { ErrorLabel, Input, InputIconRight, Label } from "../../styled/Inputs";
+import { Row } from "../../styled/Flex";
 import { useState } from "react";
 
 const PasswordInput = (props: Props.InputField) => {

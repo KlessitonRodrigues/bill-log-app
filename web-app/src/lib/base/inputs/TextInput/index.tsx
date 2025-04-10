@@ -1,4 +1,4 @@
-import { ErrorLabel, Input, Label } from "../../StyledComponents/Inputs";
+import { ErrorLabel, Input, Label } from "../../styled/Inputs";
 
 const TextInput = (props: Props.InputField) => {
   const { name, label, placeholder, error, input } = props;

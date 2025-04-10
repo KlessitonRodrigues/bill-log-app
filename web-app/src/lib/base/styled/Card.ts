@@ -17,14 +17,14 @@ export const Card = styled.div<Props.CardField>(
   `
 );
 
-export const CardWhiteBg = styled(Card)(
+export const CardWhite = styled(Card)(
   ({ theme }) => css`
     background-color: ${theme.colors.bg1};
     color: ${theme.colors.text1};
   `
 );
 
-export const CardMainBg = styled(Card)(
+export const CardMain = styled(Card)(
   ({ theme }) => css`
     background-color: ${theme.colors.main};
     color: ${theme.colors.white};

@@ -10,7 +10,7 @@ import { Toaster } from "react-hot-toast";
 
 const toastOptions = { duration: 8000, style: { minWidth: "20rem" } };
 
-const AppProviders = (props: PropsWithChildren) => {
+const Providers = (props: PropsWithChildren) => {
   const { isDark, color } = useTheme();
   const theme = getTheme(isDark, color);
 
@@ -25,4 +25,4 @@ const AppProviders = (props: PropsWithChildren) => {
   );
 };
 
-export default AppProviders;
+export default Providers;

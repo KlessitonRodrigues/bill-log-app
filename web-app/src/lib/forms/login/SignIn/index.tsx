@@ -1,12 +1,12 @@
 import { useForm } from "react-hook-form";
 import PasswordInput from "src/lib/base/inputs/PasswordInput";
 import TextInput from "src/lib/base/inputs/TextInput";
-import { ButtonMain, ButtonWhite } from "src/lib/base/StyledComponents/Buttons";
-import { Row } from "src/lib/base/StyledComponents/Flex";
+import { ButtonMain, ButtonWhite } from "src/lib/base/styled/Buttons";
+import { Row } from "src/lib/base/styled/Flex";
 import { signInform } from "./form";
-import Text from "src/lib/base/Text";
+import Text from "src/lib/base/common/Text";
 import authService from "src/services/auth";
-import { Form } from "src/lib/base/StyledComponents/Forms";
+import { Form } from "src/lib/base/styled/Forms";
 import toast from "react-hot-toast";
 
 const SignInForm = (props: Props.SignInFormProps) => {

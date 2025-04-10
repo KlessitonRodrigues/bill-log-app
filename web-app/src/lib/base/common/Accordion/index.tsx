@@ -4,8 +4,8 @@ import {
   AccordionContainer,
   AccordionContent,
   AccordionHeader,
-} from "src/lib/base/StyledComponents/Accordion";
-import { Hr } from "src/lib/base/StyledComponents/Divisors";
+} from "src/lib/base/styled/Accordion";
+import { Hr } from "src/lib/base/styled/Divisors";
 
 import Icons from "../Icons";
 import If from "../Conditional/If";
