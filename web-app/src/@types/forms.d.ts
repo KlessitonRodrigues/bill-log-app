@@ -3,4 +3,10 @@ declare namespace Form {
     email?: string;
     password?: string;
   };
+
+  type SignUp = {
+    email?: string;
+    password?: string;
+    confirmPassword?: string;
+  };
 }

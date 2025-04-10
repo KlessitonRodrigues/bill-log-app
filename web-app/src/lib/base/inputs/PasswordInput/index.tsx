@@ -9,7 +9,7 @@ import { Row } from "../../StyledComponents/Flex";
 import { useState } from "react";
 
 const PasswordInput = (props: Props.InputField) => {
-  const { name, label, placeholder, error } = props;
+  const { name, label, placeholder, error, input } = props;
   const [visible, setVisible] = useState(false);
 
   return (
@@ -23,11 +23,13 @@ const PasswordInput = (props: Props.InputField) => {
           placeholder={placeholder}
           autoComplete={name}
           error={!!error}
+          {...input}
         />
         <InputIconRight>
-          {visible ? (
+          {visible && (
             <PiEyeBold size={22} onClick={() => setVisible(!visible)} />
-          ) : (
+          )}
+          {!visible && (
             <PiEyeClosedBold size={22} onClick={() => setVisible(!visible)} />
           )}
         </InputIconRight>

@@ -8,10 +8,15 @@ const values: Form.SignIn = {
 };
 
 const resolver: Resolver<Form.SignIn> = async (data, ctx, opt) => {
-  const schema: Record<keyof Form.SignIn, any> = {
-    email: z.string().email("Invalid email format"),
-    password: z.string().min(6, "Password must be at least 6 characters long"),
-  };
+  const schema: Utils.ZodSchema<typeof data> = {};
+
+  schema.email = z
+    .string()
+    .nonempty("Email is required")
+    .email("Invalid email format");
+
+  schema.password = z.string().nonempty("Password is required");
+
   return zodResolver(z.object(schema))(data, ctx, opt);
 };
 

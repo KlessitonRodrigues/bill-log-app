@@ -16,10 +16,17 @@ export const Button = styled.button(
   `
 );
 
+export const ButtonMain = styled(Button)(
+  ({ theme }) => css`
+    background-color: ${theme.colors.main};
+    color: ${theme.colors.white};
+  `
+);
+
 export const ButtonWhite = styled(Button)(
   ({ theme }) => css`
     background-color: ${theme.colors.white};
-    color: ${theme.colors.text2};
+    color: ${theme.colors.main};
   `
 );
 

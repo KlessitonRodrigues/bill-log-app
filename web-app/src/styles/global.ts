@@ -120,6 +120,7 @@ export default createGlobalStyle(
 
     /* Text */
     .text-center {
+      width: 100%;
       text-align: center;
     }
 

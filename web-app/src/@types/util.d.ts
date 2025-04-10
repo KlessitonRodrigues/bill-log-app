@@ -1,7 +1,7 @@
 declare namespace Utils {
-  type Paths = "/home";
-
   type TranslationFile = Record<string, string>;
+
+  type ZodSchema<T> = Partial<Record<keyof T, any>>;
 
   type TextTags =
     | "b"

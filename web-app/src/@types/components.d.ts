@@ -59,6 +59,7 @@ declare namespace Props {
     label?: string;
     placeholder?: string;
     error?: string;
+    input?: any;
   };
 
   type Icons = {
@@ -101,5 +102,13 @@ declare namespace Props {
     icon?: Utils.IconTypes;
     label?: string;
     path?: string;
+  };
+
+  type SignInFormProps = {
+    goAccountForm?: () => void;
+  };
+
+  type SignUpFormProps = {
+    goLoginForm?: () => void;
   };
 }

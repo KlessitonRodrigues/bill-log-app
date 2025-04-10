@@ -1,62 +1,61 @@
 import { useForm } from "react-hook-form";
 import PasswordInput from "src/lib/base/inputs/PasswordInput";
 import TextInput from "src/lib/base/inputs/TextInput";
-import {
-  ButtonGreen,
-  ButtonWhite,
-} from "src/lib/base/StyledComponents/Buttons";
-import { Column, Row } from "src/lib/base/StyledComponents/Flex";
+import { ButtonMain, ButtonWhite } from "src/lib/base/StyledComponents/Buttons";
+import { Row } from "src/lib/base/StyledComponents/Flex";
 import { signInform } from "./form";
 import Text from "src/lib/base/Text";
+import { Form } from "src/lib/base/StyledComponents/Forms";
+import authService from "src/services/auth";
+import toast from "react-hot-toast";
 
-type SignUpFormProps = {
-  onClick?: () => void;
-};
+const SignUpForm = (props: Props.SignUpFormProps) => {
+  const { goLoginForm } = props;
+  const { handleSubmit, register, formState } = useForm(signInform);
 
-const SignUpForm = (props: SignUpFormProps) => {
-  const { onClick } = props;
-  const { handleSubmit, formState } = useForm(signInform);
-  const { errors } = formState;
-
-  const onSubmit = async (ev: any) => {
-    ev.preventDefault();
-    const formData = new FormData(ev.target);
-    const data = Object.fromEntries(formData.entries());
-    console.log(data);
+  const onSubmit = async (data: Form.SignUp) => {
+    try {
+      const res = await authService.signUp(data);
+      toast.success("Nova conta criada com sucesso");
+      goLoginForm?.();
+    } catch (err: any) {
+      toast.error(err.response?.data?.error);
+    }
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <Column left gap={8}>
-        <Row center>
-          <Text tag="h1">Criar Conta</Text>
-        </Row>
-        <TextInput
-          label="Email"
-          name="email"
-          placeholder="Enter your email"
-          error={errors.email?.message}
-        />
-        <PasswordInput
-          label="Password"
-          name="password"
-          placeholder="Enter your password"
-          error={errors.password?.message}
-        />
-        <PasswordInput
-          label="Confirm Password"
-          name="password_confirm"
-          placeholder="Enter your confirm password"
-          error={errors.password?.message}
-        />
-        <Row center>
-          <ButtonGreen>Criar conta</ButtonGreen>
-          <ButtonWhite type="button" onClick={onClick}>
-            Usar uma conta
-          </ButtonWhite>
-        </Row>
-      </Column>
-    </form>
+    <Form onSubmit={handleSubmit(onSubmit)}>
+      <Text tag="h1" className="text-center">
+        Criar Conta
+      </Text>
+      <TextInput
+        name="name"
+        label="Email"
+        placeholder="Enter your email"
+        input={register("email")}
+        error={formState.errors.email?.message}
+      />
+      <PasswordInput
+        name="password"
+        label="Password"
+        placeholder="Enter your password"
+        input={register("password")}
+        error={formState.errors.password?.message}
+      />
+      <PasswordInput
+        name="confirmPassword"
+        label="Confirm Password"
+        placeholder="Enter your confirm password"
+        input={register("confirmPassword")}
+        error={formState.errors.confirmPassword?.message}
+      />
+      <Row center>
+        <ButtonMain>Criar conta</ButtonMain>
+        <ButtonWhite type="button" onClick={goLoginForm}>
+          Usar uma conta
+        </ButtonWhite>
+      </Row>
+    </Form>
   );
 };
 
