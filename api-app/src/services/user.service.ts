@@ -10,7 +10,10 @@ export class UserService {
   ) {}
 
   async getUser(userId: string) {
-    const user = await this.UserTable.findOne({ where: { id: userId } });
+    const user = await this.UserTable.findOne({
+      attributes: { exclude: ["password"] },
+      where: { id: userId },
+    });
     if (!user) throw new Error("user not found");
     return user;
   }

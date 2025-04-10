@@ -5,13 +5,17 @@ import { AuthService } from "./services/auth.service";
 import { UserService } from "./services/user.service";
 import { AuthController } from "./controllers/auth.controller";
 import UserModel from "./model/user.model";
+import BillLogModel from "./model/billLog.model";
+import { BillLogController } from "./controllers/billLog.controller";
+import { BillLogService } from "./services/billLog.service";
 
 @Module({
   imports: [
     SequelizeModule.forRoot(sequelizeConfig),
     SequelizeModule.forFeature([UserModel]),
+    SequelizeModule.forFeature([BillLogModel]),
   ],
-  controllers: [AuthController],
-  providers: [AuthService, UserService],
+  controllers: [AuthController, BillLogController],
+  providers: [AuthService, UserService, BillLogService],
 })
 export class AppModule {}
