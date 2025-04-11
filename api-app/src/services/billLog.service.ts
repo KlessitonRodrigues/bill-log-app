@@ -11,10 +11,10 @@ export class BillLogService {
   ) {}
 
   async getBillLogs(filters: {
-    cpf: string;
-    startDate: string;
-    endDate: string;
-    status: string;
+    cpf?: string;
+    startDate?: string;
+    endDate?: string;
+    status?: string;
   }) {
     const { cpf, endDate, startDate, status } = filters;
 

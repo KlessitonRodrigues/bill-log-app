@@ -15,7 +15,7 @@ const Header = () => {
   return (
     <CardWhite p={4}>
       <Row gap={4}>
-        <PiHandCoins size={32} />
+        <PiHandCoins size={38} />
         <Text tag="h2">Dashboard</Text>
         <Row right>
           <ButtonOutline onClick={onLogout}>

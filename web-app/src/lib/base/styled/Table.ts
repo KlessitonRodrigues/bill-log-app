@@ -1,10 +1,24 @@
 import styled, { css } from "styled-components";
 
-import { cssSize } from "src/styles/utils";
+import { cssSize, screenSize } from "src/styles/utils";
 
-export const Table = styled.table(({}) => css``);
+export const Table = styled.table(
+  ({}) => css`
+    width: 100%;
+    overflow: auto;
 
-export const TableHeader = styled.thead(({}) => css``);
+    @media (max-width: ${screenSize.tablet}px) {
+      display: block;
+      padding-bottom: ${cssSize(4)};
+    }
+  `
+);
+
+export const TableHeader = styled.thead(
+  ({}) => css`
+    white-space: nowrap;
+  `
+);
 
 export const TableHeaderRow = styled.tr(
   ({ theme }) => css`

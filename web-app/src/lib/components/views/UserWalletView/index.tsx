@@ -28,7 +28,7 @@ const UserWalletView = () => {
       <Row responsive left gap={6}>
         <Row left fit>
           <Text tag="h6">Saldo:</Text>
-          <Text tag="p">4000</Text>
+          <Text tag="p">{user?.total}</Text>
         </Row>
       </Row>
     </CardWhite>
