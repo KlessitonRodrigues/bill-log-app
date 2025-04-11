@@ -10,11 +10,12 @@ Application to display bill logs using ReactJS, NestJS and MySQL database.
 - ViteJS
 - Styled-Components
 
-#### 🚀 Start Application
+#### 🚀 Start Web Application
 
-- run "yarn dev"
+- go to **/web-app**
+- run **yarn** and **yarn dev**
 
-### 📡 Bill Logs Web
+### 📡 Bill Logs API
 
 #### 🔨 Frameworks
 
@@ -24,9 +25,10 @@ Application to display bill logs using ReactJS, NestJS and MySQL database.
 
 #### 📪 Endpoints
 
-- Import the file "insomnia.json" into insomnia app to see each endpoint
+- **/api-app/insomnia.json** has all endpoints and some request examples.
 
-#### 🚀 Start Application
+#### 🚀 Start API Application
 
-- ".env" file add to testing propous.
-- run "docker-compose up --build"
+- **.env** file added to testing purpose.
+- go to **/api-app**
+- run **docker-compose up --build**

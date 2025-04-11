@@ -15,9 +15,9 @@ const LoginPage = () => {
     <Row h="100vh" responsive p={6} gap={12}>
       <Box h="100%">
         <CardWhite h="100%">
-          <Column center h="100%">
+          <Column center h="100%" gap={8}>
             <Text tag="h1" size={30}>
-              Bill Logs
+              Aplicativo de registro
             </Text>
             <BillChartAnimation />
           </Column>
