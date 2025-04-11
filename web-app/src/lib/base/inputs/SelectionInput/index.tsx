@@ -8,7 +8,7 @@ const SelectionInput = (props: Props.SelectionField) => {
     <Label>
       {label}
       <Select
-        className="react-selector"
+        className={`react-selector ${error ? "error" : ""}`}
         classNamePrefix="react-selector"
         closeMenuOnSelect
         isClearable

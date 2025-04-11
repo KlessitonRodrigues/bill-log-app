@@ -6,12 +6,26 @@ import useTheme from "src/hooks/useTheme";
 import GlobalCSS from "src/styles/global";
 import { getTheme } from "src/styles/theme";
 
-import { Toaster } from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
 import { QueryClient, QueryClientProvider } from "react-query";
 
 const toastOptions = { duration: 8000, style: { minWidth: "20rem" } };
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      onError: (error: any) => {
+        toast.error(error.response?.data?.message);
+      },
+    },
+    mutations: {
+      onError: (error: any) => {
+        console.log(error);
+        toast.error(error.response?.data?.message);
+      },
+    },
+  },
+});
 
 const Providers = (props: PropsWithChildren) => {
   const { isDark, color } = useTheme();

@@ -8,6 +8,5 @@ export const Form = styled.form(
     display: flex;
     flex-direction: column;
     gap: ${cssSize(4)};
-    padding: ${cssSize(6)} ${cssSize(4)};
   `
 );

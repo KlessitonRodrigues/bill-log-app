@@ -3,7 +3,7 @@ import { CardWhite } from "src/lib/base/styled/Card";
 import { Hr } from "src/lib/base/styled/Divisors";
 import { Row } from "src/lib/base/styled/Flex";
 import { useQuery } from "react-query";
-import billLogService from "src/services/billLogs";
+import billLogService from "src/services/bill";
 import TableView from "../../common/Table";
 import { ButtonMain } from "src/lib/base/styled/Buttons";
 import TextInput from "src/lib/base/inputs/TextInput";

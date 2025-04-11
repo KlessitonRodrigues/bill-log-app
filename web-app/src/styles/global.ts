@@ -134,6 +134,10 @@ export default createGlobalStyle(
       overflow: hidden;
     }
 
+    .react-selector.error .react-selector__control {
+      border: ${theme.border.red} !important;
+    }
+
     @media (max-width: ${screenSize.tablet}px) {
       html {
         font-size: 15px;

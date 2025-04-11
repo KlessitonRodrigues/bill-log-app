@@ -9,4 +9,13 @@ declare namespace Form {
     password?: string;
     confirmPassword?: string;
   };
+
+  type BillLog = {
+    cpf?: string;
+    date?: string;
+    description?: string;
+    pointsAmount?: string;
+    amount?: string;
+    status?: string;
+  };
 }
