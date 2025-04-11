@@ -23,7 +23,7 @@ const Page = (props: PropsWithChildren) => {
   }, []);
 
   useEffect(() => {
-    if (user.email) setUser(user);
+    if (user?.email) setUser(user);
   }, [user]);
 
   return (

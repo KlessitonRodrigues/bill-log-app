@@ -12,7 +12,7 @@ const LoginPage = () => {
   const onChangeForm = () => setNewAccount(!newAccount);
 
   return (
-    <Row h="100vh" responsive p={6} gap={12}>
+    <Row h="100vh" responsive p={8} gap={8}>
       <Box h="100%">
         <CardWhite h="100%">
           <Column center h="100%" gap={8}>

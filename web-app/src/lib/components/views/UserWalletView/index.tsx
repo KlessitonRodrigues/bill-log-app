@@ -12,17 +12,17 @@ const UserWalletView = () => {
   return (
     <CardWhite>
       <Text tag="h5">
-        Dados do {findOptionsLabel(user.rule, userRuleOptions)}
+        Dados do {findOptionsLabel(user?.rule, userRuleOptions)}
       </Text>
       <Hr />
       <Row responsive left gap={6}>
         <Row left fit>
           <Text tag="h6">Nome:</Text>
-          <Text tag="p">{user.name}</Text>
+          <Text tag="p">{user?.name}</Text>
         </Row>
         <Row left fit>
           <Text tag="h6">Email:</Text>
-          <Text tag="p">{user.email}</Text>
+          <Text tag="p">{user?.email}</Text>
         </Row>
       </Row>
       <Row responsive left gap={6}>
