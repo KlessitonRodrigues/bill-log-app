@@ -8,6 +8,7 @@ import UserModel from "./model/user.model";
 import BillLogModel from "./model/billLog.model";
 import { BillLogController } from "./controllers/billLog.controller";
 import { BillLogService } from "./services/billLog.service";
+import { UserController } from "./controllers/user.controller";
 
 @Module({
   imports: [
@@ -15,7 +16,7 @@ import { BillLogService } from "./services/billLog.service";
     SequelizeModule.forFeature([UserModel]),
     SequelizeModule.forFeature([BillLogModel]),
   ],
-  controllers: [AuthController, BillLogController],
+  controllers: [AuthController, BillLogController, UserController],
   providers: [AuthService, UserService, BillLogService],
 })
 export class AppModule {}

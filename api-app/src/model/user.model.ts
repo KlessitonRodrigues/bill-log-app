@@ -1,7 +1,7 @@
 import { Column, Model, Table, IsEmail } from "sequelize-typescript";
 
 @Table({
-  tableName: "users_2",
+  tableName: "users_3",
 })
 export default class UserModel extends Model {
   @IsEmail
@@ -12,10 +12,10 @@ export default class UserModel extends Model {
   password: string;
 
   @Column
-  verify_code: string;
+  verifyCode: string;
 
   @Column
-  verify_code_time: string;
+  verifyCodeTime: string;
 
   @Column
   name: string;

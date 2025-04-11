@@ -57,8 +57,8 @@ export class AuthService {
     const user = await this.UserTable.findOne({ where: { email } });
     if (!user) throw new Error("user not found");
     const code = Math.random().toString().substring(2, 6);
-    user.verify_code = code;
-    user.verify_code_time = String(Date.now() + hoursToMs(1));
+    user.verifyCode = code;
+    user.verifyCodeTime = String(Date.now() + hoursToMs(1));
     await user.save();
     return code;
   }
@@ -66,10 +66,10 @@ export class AuthService {
   async verifyCode(email: string, userCode: string) {
     const user = await this.UserTable.findOne({ where: { email } });
     if (!user) throw new Error("user not found");
-    if (!user.verify_code) throw new Error("Code not requested");
-    if (user.verify_code !== userCode)
+    if (!user.verifyCode) throw new Error("Code not requested");
+    if (user.verifyCode !== userCode)
       throw new Error("Invalid verification code");
-    if (Number(user.verify_code_time) < Date.now())
+    if (Number(user.verifyCodeTime) < Date.now())
       throw new Error("Code was expired");
 
     const newToken = jwt.sign({ id: user.id }, env.TOKEN_KEY, {

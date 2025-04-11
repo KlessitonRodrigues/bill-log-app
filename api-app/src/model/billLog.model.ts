@@ -1,7 +1,7 @@
 import { Column, IsDate, IsNumeric, Model, Table } from "sequelize-typescript";
 
 @Table({
-  tableName: "bill_logs_2",
+  tableName: "bill_logs_3",
 })
 export default class BillLogModel extends Model {
   @Column({ allowNull: false })
