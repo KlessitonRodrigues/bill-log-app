@@ -20,6 +20,12 @@ const LoginPage = () => {
               Aplicativo de registro
             </Text>
             <BillChartAnimation />
+            <Box m="0 auto" maxw="30rem">
+              <Text tag="p" size={20} className="text-center">
+                Verique que seu relatório de transações agora mesmo! Faça login
+                ou crie uma conta para acessar o sua tabela de registro.
+              </Text>
+            </Box>
           </Column>
         </CardWhite>
       </Box>
