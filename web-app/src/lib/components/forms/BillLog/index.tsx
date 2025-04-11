@@ -17,7 +17,7 @@ import { Link } from "react-router-dom";
 import NumberInput from "src/lib/base/inputs/NumberInput";
 
 const BIllLogForm = () => {
-  const { handleSubmit, register, setValue, formState } = useForm(billLogForm);
+  const { register, formState, ...form } = useForm(billLogForm);
   const submitQuery = useMutation({ mutationFn: billService.createBillLog });
 
   const onSubmit = async (data: Form.BillLog) => {
@@ -29,7 +29,7 @@ const BIllLogForm = () => {
     <CardWhite>
       <Text tag="h3">Novo registro de transação</Text>
       <Hr />
-      <Form onSubmit={handleSubmit(onSubmit)}>
+      <Form onSubmit={form.handleSubmit(onSubmit)}>
         <Row top>
           <NumberInput
             name="cpf"
@@ -59,7 +59,7 @@ const BIllLogForm = () => {
             placeholder="Selecione o status"
             error={formState.errors.status?.message}
             options={billStatusOptions}
-            onChange={(option) => setValue("status", option?.value)}
+            onChange={(option) => form.setValue("status", option?.value)}
           />
         </Row>
         <Row top>

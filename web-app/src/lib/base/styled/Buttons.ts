@@ -9,10 +9,10 @@ export const Button = styled.button(
     font-family: "Roboto", sans-serif;
     min-width: fit-content;
     font-size: ${theme.fontSize.md};
-    padding: ${cssSize(2)} ${cssSize(4)};
-    transition: opacity 0.3s;
-    box-shadow: ${theme.shadow.md};
+    padding: ${cssSize(2.5)} ${cssSize(4)};
+    box-shadow: ${theme.shadow.sm};
     text-decoration: none;
+    transition: opacity 0.3s;
 
     &:hover {
       opacity: 0.75;
@@ -22,15 +22,15 @@ export const Button = styled.button(
 
 export const ButtonMain = styled(Button)(
   ({ theme }) => css`
-    background-color: ${theme.colors.main};
-    color: ${theme.colors.white};
+    background-color: ${theme.colors.mainBg};
+    color: ${theme.colors.mainText};
   `
 );
 
 export const ButtonWhite = styled(Button)(
   ({ theme }) => css`
     background-color: ${theme.colors.white};
-    color: ${theme.colors.main};
+    color: ${theme.colors.mainBg};
   `
 );
 
@@ -45,5 +45,15 @@ export const ButtonGreen = styled(Button)(
   ({ theme }) => css`
     background-color: ${theme.colors.green};
     color: ${theme.colors.white};
+  `
+);
+
+export const ButtonOutline = styled(Button)(
+  ({ theme }) => css`
+    background-color: transparent;
+    color: ${theme.colors.text1};
+    border: ${theme.border.md};
+    box-shadow: none;
+    padding: ${cssSize(1)} ${cssSize(3)};
   `
 );

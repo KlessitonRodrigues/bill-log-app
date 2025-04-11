@@ -8,6 +8,8 @@ declare namespace Form {
     email?: string;
     password?: string;
     confirmPassword?: string;
+    rule?: string;
+    name?: string;
   };
 
   type BillLog = {

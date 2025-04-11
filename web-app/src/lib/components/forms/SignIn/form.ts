@@ -12,10 +12,10 @@ const resolver: Resolver<Form.SignIn> = async (data, ctx, opt) => {
 
   schema.email = z
     .string()
-    .nonempty("Email is required")
-    .email("Invalid email format");
+    .nonempty("Email é obrigatório")
+    .email("Formato inválido");
 
-  schema.password = z.string().nonempty("Password is required");
+  schema.password = z.string().nonempty("Senha é obrigatório");
 
   return zodResolver(z.object(schema))(data, ctx, opt);
 };

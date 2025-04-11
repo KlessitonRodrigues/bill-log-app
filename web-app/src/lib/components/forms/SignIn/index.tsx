@@ -9,24 +9,22 @@ import authService from "src/services/auth";
 import { Form } from "src/lib/base/styled/Forms";
 import toast from "react-hot-toast";
 import { CardWhite } from "src/lib/base/styled/Card";
+import { useMutation } from "react-query";
 
 const SignInForm = (props: Props.SignInFormProps) => {
   const { goAccountForm } = props;
-  const { handleSubmit, register, formState } = useForm(signInform);
+  const { register, formState, ...form } = useForm(signInform);
+  const submitQuery = useMutation({ mutationFn: authService.signIn });
 
   const onSubmit = async (data: Form.SignIn) => {
-    try {
-      const res = await authService.signIn(data);
-      console.log(res);
-      toast.success("Login realizado com sucesso");
-    } catch (err: any) {
-      toast.error(err.response?.data?.error);
-    }
+    await submitQuery.mutateAsync(data);
+    toast.success("Login realizado com sucesso");
+    window.location.pathname = "/dashboard";
   };
 
   return (
     <CardWhite p={8}>
-      <Form onSubmit={handleSubmit(onSubmit)}>
+      <Form onSubmit={form.handleSubmit(onSubmit)}>
         {formState.errors.root?.message}
         <Text tag="h1" className="text-center" size={32}>
           Login
@@ -34,14 +32,14 @@ const SignInForm = (props: Props.SignInFormProps) => {
         <TextInput
           name="email"
           label="Email"
-          placeholder="Enter your email"
+          placeholder="Digite o email"
           input={register("email")}
           error={formState.errors.email?.message}
         />
         <PasswordInput
           name="password"
-          label="Password"
-          placeholder="Enter your password"
+          label="Senha"
+          placeholder="Digite a senha"
           input={register("password")}
           error={formState.errors.password?.message}
         />

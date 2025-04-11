@@ -1,7 +1,7 @@
 import { ErrorLabel, Input, Label } from "../../styled/Inputs";
 
 const NumberInput = (props: Props.InputField) => {
-  const { name, label, placeholder, error, input } = props;
+  const { name, label, placeholder, error, input, value, onChange } = props;
 
   return (
     <Label>
@@ -18,6 +18,8 @@ const NumberInput = (props: Props.InputField) => {
             ev.preventDefault();
           }
         }}
+        value={value}
+        onChange={(ev) => onChange?.(ev.target.value)}
         {...input}
       />
       <ErrorLabel>{error}</ErrorLabel>

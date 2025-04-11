@@ -11,24 +11,32 @@ import { billStatusOptions } from "src/constants/dataOptions";
 import { billLogsTable } from "src/constants/dataTable";
 import { ButtonMain } from "src/lib/base/styled/Buttons";
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import NumberInput from "src/lib/base/inputs/NumberInput";
+import { findOptionsLabel } from "src/utils/array";
 
 const filters = { cpf: "", status: "", startDate: "", endDate: "" };
 
 const BillLogsView = () => {
   const [filter, setFilters] = useState(filters);
   const query = useQuery({ queryFn: () => billLogService.getBillLogs(filter) });
-  const [billLogs = []] = [query.data?.data, query.isLoading];
+  const [billLogs = [], isLoading] = [query.data?.data, query.isLoading];
+
+  const billLogTable = useMemo(() => {
+    return billLogs.map((item: any) => ({
+      ...item,
+      status: findOptionsLabel(item.status, billStatusOptions),
+    }));
+  }, [billLogs]);
 
   useEffect(() => {
     if (filter.cpf && filter.cpf.length < 3) return;
-    query.refetch();
+    if (!isLoading) query.refetch();
   }, [filter]);
 
   return (
     <CardWhite>
-      <Text tag="h3">Registro de Transações</Text>
+      <Text tag="h5">Registro de Transações</Text>
       <Hr />
       <Row responsive gap={4}>
         <NumberInput
@@ -55,7 +63,7 @@ const BillLogsView = () => {
           onChange={(option) => setFilters({ ...filter, status: option.value })}
         />
       </Row>
-      <TableView headers={billLogsTable} rows={billLogs} />
+      <TableView headers={billLogsTable} rows={billLogTable} />
       <Link to="/bills/form">
         <ButtonMain>Adicionar Registro</ButtonMain>
       </Link>

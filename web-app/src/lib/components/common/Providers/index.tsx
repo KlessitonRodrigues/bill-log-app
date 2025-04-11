@@ -28,8 +28,8 @@ const queryClient = new QueryClient({
 });
 
 const Providers = (props: PropsWithChildren) => {
-  const { isDark, color } = useTheme();
-  const theme = getTheme(isDark, color);
+  const { isDark } = useTheme();
+  const theme = getTheme(isDark);
 
   return (
     <QueryClientProvider client={queryClient}>
