@@ -5,30 +5,54 @@ import { Row } from "src/lib/base/styled/Flex";
 import { useQuery } from "react-query";
 import billLogService from "src/services/bill";
 import TableView from "../../common/Table";
-import TextInput from "src/lib/base/inputs/TextInput";
 import SelectionInput from "src/lib/base/inputs/SelectionInput";
 import DateInput from "src/lib/base/inputs/DateInput";
 import { billStatusOptions } from "src/constants/dataOptions";
 import { billLogsTable } from "src/constants/dataTable";
 import { ButtonMain } from "src/lib/base/styled/Buttons";
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import NumberInput from "src/lib/base/inputs/NumberInput";
+
+const filters = { cpf: "", status: "", startDate: "", endDate: "" };
 
 const BillLogsView = () => {
-  const query = useQuery({ queryFn: billLogService.getBillLogs });
+  const [filter, setFilters] = useState(filters);
+  const query = useQuery({ queryFn: () => billLogService.getBillLogs(filter) });
   const [billLogs = []] = [query.data?.data, query.isLoading];
+
+  useEffect(() => {
+    if (filter.cpf && filter.cpf.length < 3) return;
+    query.refetch();
+  }, [filter]);
 
   return (
     <CardWhite>
       <Text tag="h3">Registro de Transações</Text>
       <Hr />
       <Row responsive gap={4}>
-        <TextInput label="Pesquisar" placeholder="Buscar por CPF" />
-        <DateInput label="De" placeholder="Nenhum" />
-        <DateInput label="Até" />
+        <NumberInput
+          label="Pesquisar"
+          placeholder="Buscar por CPF"
+          value={filter.cpf}
+          onChange={(cpf) => setFilters({ ...filter, cpf })}
+        />
+        <DateInput
+          label="De"
+          value={filter.startDate}
+          onChange={(startDate) => setFilters({ ...filter, startDate })}
+        />
+        <DateInput
+          label="Até"
+          value={filter.endDate}
+          onChange={(endDate) => setFilters({ ...filter, endDate })}
+        />
         <SelectionInput
           label="Status"
           placeholder="Tipo de status"
+          value={filter.status}
           options={billStatusOptions}
+          onChange={(option) => setFilters({ ...filter, status: option.value })}
         />
       </Row>
       <TableView headers={billLogsTable} rows={billLogs} />

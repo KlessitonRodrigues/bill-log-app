@@ -13,6 +13,11 @@ const NumberInput = (props: Props.InputField) => {
         placeholder={placeholder}
         autoComplete={name}
         error={!!error}
+        onKeyDown={(ev) => {
+          if (ev.key.length === 1 && ev.key.match(/[\D]/g)) {
+            ev.preventDefault();
+          }
+        }}
         {...input}
       />
       <ErrorLabel>{error}</ErrorLabel>

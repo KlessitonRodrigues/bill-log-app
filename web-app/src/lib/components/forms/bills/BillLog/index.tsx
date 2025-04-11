@@ -14,6 +14,7 @@ import { Hr } from "src/lib/base/styled/Divisors";
 import Text from "src/lib/base/common/Text";
 import { billStatusOptions } from "src/constants/dataOptions";
 import { Link } from "react-router-dom";
+import NumberInput from "src/lib/base/inputs/NumberInput";
 
 const BIllLogForm = () => {
   const { handleSubmit, register, setValue, formState } = useForm(billLogForm);
@@ -30,7 +31,7 @@ const BIllLogForm = () => {
       <Hr />
       <Form onSubmit={handleSubmit(onSubmit)}>
         <Row top>
-          <TextInput
+          <NumberInput
             name="cpf"
             label="CPF"
             placeholder="Digite número de CPF"
@@ -62,14 +63,14 @@ const BIllLogForm = () => {
           />
         </Row>
         <Row top>
-          <TextInput
+          <NumberInput
             name="pointsAmount"
             label="Pontos"
             placeholder="0"
             input={register("pointsAmount")}
             error={formState.errors.pointsAmount?.message}
           />
-          <TextInput
+          <NumberInput
             name="amount"
             label="Valor"
             placeholder="0"

@@ -1,7 +1,7 @@
 import { ErrorLabel, Input, Label } from "../../styled/Inputs";
 
 const DateInput = (props: Props.InputField) => {
-  const { name, label, placeholder, error, input } = props;
+  const { name, label, placeholder, error, input, value, onChange } = props;
 
   return (
     <Label>
@@ -13,6 +13,8 @@ const DateInput = (props: Props.InputField) => {
         placeholder={placeholder}
         autoComplete={name}
         error={!!error}
+        value={value}
+        onChange={(ev) => onChange?.(ev.target.value)}
         {...input}
       />
       <ErrorLabel>{error}</ErrorLabel>

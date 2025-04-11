@@ -60,6 +60,8 @@ declare namespace Props {
     placeholder?: string;
     error?: string;
     input?: any;
+    value?: string;
+    onChange?: (value: string) => void;
   };
 
   type SelectionField = {
@@ -67,6 +69,7 @@ declare namespace Props {
     label?: string;
     placeholder?: string;
     error?: string;
+    value?: string;
     options?: { value: string; label: string }[];
     onChange?: (option: { value: string; label: string }) => void;
   };

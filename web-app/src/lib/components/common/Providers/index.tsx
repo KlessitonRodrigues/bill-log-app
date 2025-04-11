@@ -14,13 +14,13 @@ const toastOptions = { duration: 8000, style: { minWidth: "20rem" } };
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
+      retryDelay: 1000,
       onError: (error: any) => {
         toast.error(error.response?.data?.message);
       },
     },
     mutations: {
       onError: (error: any) => {
-        console.log(error);
         toast.error(error.response?.data?.message);
       },
     },

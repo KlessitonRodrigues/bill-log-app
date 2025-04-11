@@ -132,7 +132,7 @@ export default createGlobalStyle(
     .react-selector__control {
       border-radius: ${theme.radius.sm} !important;
       border: ${theme.border.sm} !important;
-      overflow: hidden;
+      box-shadow: none !important;
     }
 
     .react-selector.error .react-selector__control {

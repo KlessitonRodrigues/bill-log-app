@@ -1,8 +1,10 @@
+import { objToQuery } from "src/utils/http";
 import axiosClient from "./axiosClient";
 
 class BillService {
-  getBillLogs() {
-    return axiosClient.get("bill-logs");
+  getBillLogs(filters: any) {
+    const query = objToQuery(filters);
+    return axiosClient.get(`bill-logs${query}`);
   }
 
   createBillLog(data: Form.BillLog) {
