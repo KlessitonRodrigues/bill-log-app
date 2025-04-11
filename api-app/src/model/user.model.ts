@@ -1,7 +1,7 @@
 import { Column, Model, Table, IsEmail } from "sequelize-typescript";
 
 @Table({
-  tableName: "users",
+  tableName: "users_2",
 })
 export default class UserModel extends Model {
   @IsEmail
@@ -16,4 +16,10 @@ export default class UserModel extends Model {
 
   @Column
   verify_code_time: string;
+
+  @Column
+  name: string;
+
+  @Column
+  rule: string;
 }

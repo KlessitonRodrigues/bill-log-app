@@ -19,17 +19,24 @@ export class AuthService {
     const user = await this.UserTable.findOne({ where: { email } });
     if (!user) throw new Error("invalid credentials");
     const isValidPassord = bcrypt.compareSync(password, user.password);
-    if (!isValidPassord) throw new Error("invalid password");
+    if (!isValidPassord) throw new Error("invalid credentials");
     return jwt.sign({ id: user.id }, env.TOKEN_KEY, { expiresIn });
   }
 
-  async signUp({ email, password }: UserModel) {
+  async signUp(user: UserModel) {
+    const { email, password } = user;
     if (!(email || password)) throw new Error("invalid credentials");
     const userExists = await this.UserTable.findOne({ where: { email } });
     if (userExists) throw new Error("user already exists");
     const hashedPassword = bcrypt.hashSync(password, 10);
-    const newUser = new UserModel({ email, password: hashedPassword });
-    return await newUser.save();
+    const newUser = await new UserModel({
+      ...user,
+      email,
+      password: hashedPassword,
+    }).save();
+
+    newUser.password = undefined;
+    return newUser;
   }
 
   async decodeToken(token: string) {
