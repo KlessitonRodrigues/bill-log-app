@@ -1,7 +1,7 @@
-import { Column, Model, Table } from "sequelize-typescript";
+import { Column, IsDate, IsNumeric, Model, Table } from "sequelize-typescript";
 
 @Table({
-  tableName: "bill_logs",
+  tableName: "bill_logs_2",
 })
 export default class BillLogModel extends Model {
   @Column({ allowNull: false })
@@ -10,12 +10,15 @@ export default class BillLogModel extends Model {
   @Column({ allowNull: false })
   description: string;
 
+  @IsDate
   @Column({ allowNull: false })
   date: string;
 
+  @IsNumeric
   @Column({ allowNull: false })
   amount: string;
 
+  @IsNumeric
   @Column({ allowNull: false })
   pointsAmount: string;
 

@@ -6,6 +6,7 @@ import {
   Param,
   Patch,
   Post,
+  Query,
   Res,
 } from "@nestjs/common";
 import { Response } from "express";
@@ -16,12 +17,12 @@ export class BillLogController {
   constructor(private billLogService: BillLogService) {}
 
   @Get()
-  async getBillLogs(@Res() res: Response) {
+  async getBillLogs(@Query() query, @Res() res: Response) {
     try {
-      const billLogs = await this.billLogService.getBillLogs();
+      const billLogs = await this.billLogService.getBillLogs(query);
       return res.status(200).json(billLogs);
     } catch (err: any) {
-      res.status(HttpStatus.BAD_REQUEST).json({ error: err.message });
+      res.status(HttpStatus.BAD_REQUEST).json({ message: err.message });
       return;
     }
   }
@@ -33,7 +34,7 @@ export class BillLogController {
       const billLog = await this.billLogService.getBillLogById(id);
       return res.status(200).json(billLog);
     } catch (err: any) {
-      res.status(HttpStatus.BAD_REQUEST).json({ error: err.message });
+      res.status(HttpStatus.BAD_REQUEST).json({ message: err.message });
       return;
     }
   }
@@ -44,7 +45,7 @@ export class BillLogController {
       const billLog = await this.billLogService.createBillLog(body);
       return res.status(201).json(billLog);
     } catch (err: any) {
-      res.status(HttpStatus.BAD_REQUEST).json({ error: err.message });
+      res.status(HttpStatus.BAD_REQUEST).json({ message: err.message });
       return;
     }
   }
@@ -55,7 +56,7 @@ export class BillLogController {
       const billLogs = await this.billLogService.createBillLogBatch(body);
       return res.status(201).json(billLogs);
     } catch (err: any) {
-      res.status(HttpStatus.BAD_REQUEST).json({ error: err.message });
+      res.status(HttpStatus.BAD_REQUEST).json({ message: err.message });
       return;
     }
   }
@@ -67,7 +68,7 @@ export class BillLogController {
       const billLog = await this.billLogService.updateBillLog(id, body);
       return res.status(200).json(billLog);
     } catch (err: any) {
-      res.status(HttpStatus.BAD_REQUEST).json({ error: err.message });
+      res.status(HttpStatus.BAD_REQUEST).json({ message: err.message });
       return;
     }
   }

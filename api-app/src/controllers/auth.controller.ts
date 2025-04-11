@@ -27,7 +27,7 @@ export class AuthController {
       const token = await this.authService.signIn(email, password, expireIn);
       return res.status(HttpStatus.OK).json({ token });
     } catch (err: any) {
-      res.status(HttpStatus.BAD_REQUEST).json({ error: err.message });
+      res.status(HttpStatus.BAD_REQUEST).json({ message: err.message });
       return;
     }
   }
@@ -38,7 +38,7 @@ export class AuthController {
       const user = await this.authService.signUp(body);
       return res.status(HttpStatus.CREATED).json(user);
     } catch (err: any) {
-      res.status(HttpStatus.BAD_REQUEST).json({ error: err.message });
+      res.status(HttpStatus.BAD_REQUEST).json({ message: err.message });
       return;
     }
   }
@@ -58,7 +58,7 @@ export class AuthController {
 
       return res.json(userData);
     } catch (err: any) {
-      res.status(HttpStatus.BAD_REQUEST).json({ error: err.message });
+      res.status(HttpStatus.BAD_REQUEST).json({ message: err.message });
       return;
     }
   }
