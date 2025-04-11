@@ -8,6 +8,7 @@ import { getTheme } from "src/styles/theme";
 
 import toast, { Toaster } from "react-hot-toast";
 import { QueryClient, QueryClientProvider } from "react-query";
+import { AccountProvider } from "src/hooks/useAccount";
 
 const toastOptions = { duration: 8000, style: { minWidth: "20rem" } };
 
@@ -35,9 +36,11 @@ const Providers = (props: PropsWithChildren) => {
     <QueryClientProvider client={queryClient}>
       <StyleSheetManager disableCSSOMInjection shouldForwardProp={isValidProp}>
         <ThemeProvider theme={theme}>
-          <GlobalCSS />
-          <Toaster toastOptions={toastOptions} />
-          {props.children}
+          <AccountProvider>
+            <GlobalCSS />
+            <Toaster toastOptions={toastOptions} />
+            {props.children}
+          </AccountProvider>
         </ThemeProvider>
       </StyleSheetManager>
     </QueryClientProvider>

@@ -10,6 +10,7 @@ import { Form } from "src/lib/base/styled/Forms";
 import toast from "react-hot-toast";
 import { CardWhite } from "src/lib/base/styled/Card";
 import { useMutation } from "react-query";
+import { setToken } from "src/utils/localStorage";
 
 const SignInForm = (props: Props.SignInFormProps) => {
   const { goAccountForm } = props;
@@ -17,9 +18,10 @@ const SignInForm = (props: Props.SignInFormProps) => {
   const submitQuery = useMutation({ mutationFn: authService.signIn });
 
   const onSubmit = async (data: Form.SignIn) => {
-    await submitQuery.mutateAsync(data);
+    const res = await submitQuery.mutateAsync(data);
+    setToken(res.data.token);
     toast.success("Login realizado com sucesso");
-    window.location.pathname = "/dashboard";
+    setTimeout(() => (window.location.pathname = "/dashboard"), 1500);
   };
 
   return (

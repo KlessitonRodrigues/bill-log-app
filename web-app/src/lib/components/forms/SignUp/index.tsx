@@ -19,7 +19,7 @@ const SignUpForm = (props: Props.SignUpFormProps) => {
   const submitQuery = useMutation({ mutationFn: authService.signUp });
 
   const onSubmit = async (data: Form.SignUp) => {
-    const res = await submitQuery.mutateAsync(data);
+    await submitQuery.mutateAsync(data);
     toast.success("Nova conta criada com sucesso");
     goLoginForm?.();
   };

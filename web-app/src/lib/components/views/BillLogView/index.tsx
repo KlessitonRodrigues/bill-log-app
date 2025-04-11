@@ -19,11 +19,14 @@ const filters = { cpf: "", status: "", startDate: "", endDate: "" };
 
 const BillLogsView = () => {
   const [filter, setFilters] = useState(filters);
-  const query = useQuery({ queryFn: () => billLogService.getBillLogs(filter) });
-  const [billLogs = [], isLoading] = [query.data?.data, query.isLoading];
+  const { data, refetch, isLoading } = useQuery({
+    queryKey: "getBillLogs",
+    queryFn: () => billLogService.getBillLogs(filter),
+  });
+  const billLogs = data?.data || [];
 
   const billLogTable = useMemo(() => {
-    return billLogs.map((item: any) => ({
+    return billLogs?.map((item: any) => ({
       ...item,
       status: findOptionsLabel(item.status, billStatusOptions),
     }));
@@ -31,7 +34,7 @@ const BillLogsView = () => {
 
   useEffect(() => {
     if (filter.cpf && filter.cpf.length < 3) return;
-    if (!isLoading) query.refetch();
+    if (!isLoading) refetch();
   }, [filter]);
 
   return (
