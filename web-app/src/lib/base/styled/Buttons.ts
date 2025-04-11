@@ -11,6 +11,8 @@ export const Button = styled.button(
     font-size: ${theme.fontSize.md};
     padding: ${cssSize(2)} ${cssSize(4)};
     transition: opacity 0.3s;
+    box-shadow: ${theme.shadow.md};
+    text-decoration: none;
 
     &:hover {
       opacity: 0.75;

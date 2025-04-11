@@ -13,7 +13,7 @@ export const Label = styled.label(
 
 export const ErrorLabel = styled.div(
   ({ theme }) => css`
-    font-size: ${theme.fontSize.md};
+    font-size: ${theme.fontSize.sm};
     color: ${theme.colors.red};
   `
 );

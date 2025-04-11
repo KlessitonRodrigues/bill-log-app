@@ -67,8 +67,8 @@ declare namespace Props {
     label?: string;
     placeholder?: string;
     error?: string;
-    input?: any;
     options?: { value: string; label: string }[];
+    onChange?: (option: { value: string; label: string }) => void;
   };
 
   type Icons = {

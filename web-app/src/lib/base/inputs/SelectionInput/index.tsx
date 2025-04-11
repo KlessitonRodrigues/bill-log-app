@@ -2,7 +2,7 @@ import Select from "react-select";
 import { ErrorLabel, Label } from "../../styled/Inputs";
 
 const SelectionInput = (props: Props.SelectionField) => {
-  const { label, placeholder, error, options } = props;
+  const { label, placeholder, error, options, onChange } = props;
 
   return (
     <Label>
@@ -14,6 +14,10 @@ const SelectionInput = (props: Props.SelectionField) => {
         isClearable
         placeholder={placeholder}
         options={options}
+        onChange={(option) => {
+          const value = { value: "", label: "", ...option };
+          onChange && onChange(value);
+        }}
       />
       <ErrorLabel>{error}</ErrorLabel>
     </Label>

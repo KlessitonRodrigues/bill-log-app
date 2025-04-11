@@ -57,6 +57,7 @@ export default createGlobalStyle(
       list-style: none;
     }
     a {
+      width: fit-content;
       color: unset;
       text-decoration: underline;
     }

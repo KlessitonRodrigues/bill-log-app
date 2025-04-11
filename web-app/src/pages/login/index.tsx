@@ -4,8 +4,8 @@ import If from "src/lib/base/common/If";
 import Text from "src/lib/base/common/Text";
 import { CardWhite } from "src/lib/base/styled/Card";
 import { Row, Box, Column } from "src/lib/base/styled/Flex";
-import SignInForm from "src/lib/forms/login/SignIn";
-import SignUpForm from "src/lib/forms/login/SignUp";
+import SignInForm from "src/lib/components/forms/login/SignIn";
+import SignUpForm from "src/lib/components/forms/login/SignUp";
 
 const LoginPage = () => {
   const [newAccount, setNewAccount] = useState(true);

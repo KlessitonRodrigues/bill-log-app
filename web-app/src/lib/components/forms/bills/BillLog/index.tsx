@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import TextInput from "src/lib/base/inputs/TextInput";
-import { ButtonMain } from "src/lib/base/styled/Buttons";
+import { ButtonMain, ButtonWhite } from "src/lib/base/styled/Buttons";
 import { Row } from "src/lib/base/styled/Flex";
 import { billLogForm } from "./form";
 import { Form } from "src/lib/base/styled/Forms";
@@ -10,9 +10,13 @@ import DateInput from "src/lib/base/inputs/DateInput";
 import SelectionInput from "src/lib/base/inputs/SelectionInput";
 import billService from "src/services/bill";
 import { useMutation } from "react-query";
+import { Hr } from "src/lib/base/styled/Divisors";
+import Text from "src/lib/base/common/Text";
+import { billStatusOptions } from "src/constants/dataOptions";
+import { Link } from "react-router-dom";
 
 const BIllLogForm = () => {
-  const { handleSubmit, register, formState } = useForm(billLogForm);
+  const { handleSubmit, register, setValue, formState } = useForm(billLogForm);
   const submitQuery = useMutation({ mutationFn: billService.createBillLog });
 
   const onSubmit = async (data: Form.BillLog) => {
@@ -22,8 +26,10 @@ const BIllLogForm = () => {
 
   return (
     <CardWhite>
+      <Text tag="h3">Novo registro de transação</Text>
+      <Hr />
       <Form onSubmit={handleSubmit(onSubmit)}>
-        <Row>
+        <Row top>
           <TextInput
             name="cpf"
             label="CPF"
@@ -39,7 +45,7 @@ const BIllLogForm = () => {
             error={formState.errors.description?.message}
           />
         </Row>
-        <Row>
+        <Row top>
           <DateInput
             name="date"
             label="Data da transação"
@@ -50,16 +56,12 @@ const BIllLogForm = () => {
             name="status"
             label="Data da transação"
             placeholder="Selecione o status"
-            input={register("status")}
             error={formState.errors.status?.message}
-            options={[
-              { label: "Aprovado", value: "approved" },
-              { label: "Reprovado", value: "rejected" },
-              { label: "Em Avaliação", value: "pending" },
-            ]}
+            options={billStatusOptions}
+            onChange={(option) => setValue("status", option?.value)}
           />
         </Row>
-        <Row>
+        <Row top>
           <TextInput
             name="pointsAmount"
             label="Pontos"
@@ -77,6 +79,9 @@ const BIllLogForm = () => {
         </Row>
         <Row>
           <ButtonMain>Salvar</ButtonMain>
+          <Link to="/dashboard">
+            <ButtonWhite type="button">Voltar</ButtonWhite>
+          </Link>
         </Row>
       </Form>
     </CardWhite>

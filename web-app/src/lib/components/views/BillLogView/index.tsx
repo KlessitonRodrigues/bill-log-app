@@ -5,25 +5,13 @@ import { Row } from "src/lib/base/styled/Flex";
 import { useQuery } from "react-query";
 import billLogService from "src/services/bill";
 import TableView from "../../common/Table";
-import { ButtonMain } from "src/lib/base/styled/Buttons";
 import TextInput from "src/lib/base/inputs/TextInput";
 import SelectionInput from "src/lib/base/inputs/SelectionInput";
 import DateInput from "src/lib/base/inputs/DateInput";
-
-const options = [
-  { value: "APPROVED", label: "Aprovado" },
-  { value: "REPROVED", label: "Reprovado" },
-  { value: "IN_AVALIATION", label: "Em Avaliação" },
-];
-
-const billLogsTable = [
-  { key: "cpf", label: "CPF" },
-  { key: "description", label: "Descrição da transação" },
-  { key: "date", label: "Data da transação" },
-  { key: "pointsAmount", label: "Pontos" },
-  { key: "amount", label: "Valor" },
-  { key: "status", label: "Status" },
-];
+import { billStatusOptions } from "src/constants/dataOptions";
+import { billLogsTable } from "src/constants/dataTable";
+import { ButtonMain } from "src/lib/base/styled/Buttons";
+import { Link } from "react-router-dom";
 
 const BillLogsView = () => {
   const query = useQuery({ queryFn: billLogService.getBillLogs });
@@ -40,10 +28,13 @@ const BillLogsView = () => {
         <SelectionInput
           label="Status"
           placeholder="Tipo de status"
-          options={options}
+          options={billStatusOptions}
         />
       </Row>
       <TableView headers={billLogsTable} rows={billLogs} />
+      <Link to="/bills/form">
+        <ButtonMain>Adicionar Registro</ButtonMain>
+      </Link>
     </CardWhite>
   );
 };
