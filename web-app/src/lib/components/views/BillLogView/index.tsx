@@ -14,17 +14,22 @@ import { Link } from "react-router-dom";
 import { useEffect, useMemo, useState } from "react";
 import NumberInput from "src/lib/base/inputs/NumberInput";
 import { findOptionsLabel } from "src/utils/array";
+import useAccount from "src/hooks/useAccount";
+import If from "src/lib/base/common/If";
+import { USER_RULE } from "src/constants/dataEnum";
 
 const filters = { cpf: "", status: "", startDate: "", endDate: "" };
 
 const BillLogsView = () => {
+  const { user } = useAccount();
   const [filter, setFilters] = useState(filters);
+
   const { data, refetch, isLoading } = useQuery({
     queryKey: "getBillLogs",
     queryFn: () => billLogService.getBillLogs(filter),
   });
-  const billLogs = data?.data || [];
 
+  const billLogs = data?.data || [];
   const billLogTable = useMemo(() => {
     return billLogs?.map((item: any) => ({
       ...item,
@@ -37,17 +42,25 @@ const BillLogsView = () => {
     if (!isLoading) refetch();
   }, [filter]);
 
+  useEffect(() => {
+    if (user?.rule === USER_RULE.USER) {
+      setFilters({ ...filter, cpf: user.cpf });
+    }
+  }, [user]);
+
   return (
     <CardWhite>
       <Text tag="h5">Registro de Transações</Text>
       <Hr />
       <Row responsive gap={4}>
-        <NumberInput
-          label="Pesquisar"
-          placeholder="Buscar por CPF"
-          value={filter.cpf}
-          onChange={(cpf) => setFilters({ ...filter, cpf })}
-        />
+        <If check={user?.rule === USER_RULE.ADMIN}>
+          <NumberInput
+            label="Pesquisar"
+            placeholder="Buscar por CPF"
+            value={filter.cpf}
+            onChange={(cpf) => setFilters({ ...filter, cpf })}
+          />
+        </If>
         <DateInput
           label="De"
           value={filter.startDate}
@@ -67,9 +80,11 @@ const BillLogsView = () => {
         />
       </Row>
       <TableView headers={billLogsTable} rows={billLogTable} />
-      <Link to="/bills/form">
-        <ButtonMain>Adicionar Registro</ButtonMain>
-      </Link>
+      <If check={user?.rule === USER_RULE.ADMIN}>
+        <Link to="/bills/form">
+          <ButtonMain>Adicionar Registro</ButtonMain>
+        </Link>
+      </If>
     </CardWhite>
   );
 };

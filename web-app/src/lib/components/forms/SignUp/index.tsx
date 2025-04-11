@@ -12,6 +12,7 @@ import { CardWhite } from "src/lib/base/styled/Card";
 import { useMutation } from "react-query";
 import SelectionInput from "src/lib/base/inputs/SelectionInput";
 import { userRuleOptions } from "src/constants/dataOptions";
+import NumberInput from "src/lib/base/inputs/NumberInput";
 
 const SignUpForm = (props: Props.SignUpFormProps) => {
   const { goLoginForm } = props;
@@ -30,6 +31,13 @@ const SignUpForm = (props: Props.SignUpFormProps) => {
         <Text tag="h1" className="text-center">
           Criar Conta
         </Text>
+        <NumberInput
+          name="cpf"
+          label="CPF"
+          placeholder="Digite o número de CPF"
+          input={register("cpf")}
+          error={formState.errors.cpf?.message}
+        />
         <TextInput
           name="name"
           label="Nome"

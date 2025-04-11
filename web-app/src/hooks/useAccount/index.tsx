@@ -10,7 +10,7 @@ import {
 const AccountCtx = createContext<Hooks.UseAccountCtx>(null);
 
 export const AccountProvider = (props: PropsWithChildren) => {
-  const [user, setUser] = useState<any>();
+  const [user, setUser] = useState<any>({});
 
   const context: Hooks.UseAccountCtx = {
     user,

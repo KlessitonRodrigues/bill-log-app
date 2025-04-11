@@ -4,7 +4,7 @@ import { Column, IsDate, IsNumeric, Model, Table } from "sequelize-typescript";
   tableName: "bill_logs",
 })
 export default class BillLogModel extends Model {
-  @Column({ allowNull: false })
+  @Column({ allowNull: false, unique: true })
   cpf: string;
 
   @Column({ allowNull: false })

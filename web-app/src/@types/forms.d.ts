@@ -5,6 +5,7 @@ declare namespace Form {
   };
 
   type SignUp = {
+    cpf?: string;
     email?: string;
     password?: string;
     confirmPassword?: string;

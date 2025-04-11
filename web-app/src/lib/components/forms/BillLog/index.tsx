@@ -23,6 +23,7 @@ const BIllLogForm = () => {
   const onSubmit = async (data: Form.BillLog) => {
     await submitQuery.mutateAsync(data);
     toast.success("Registro de transação criado com sucesso");
+    location.pathname = "/dashboard";
   };
 
   return (
